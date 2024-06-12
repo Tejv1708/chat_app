@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import ChatApp from './chat/ChatApp';
-import Sidebar from './chat/Sidebar.jsx';
-import Navbar from './chat/Navbar.jsx';
+
 import { Route, Router } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Sidebar from './chat/Sidebar';
+import ChatApp from './chat/ChatApp';
 
 function App() {
   return (
@@ -16,7 +17,6 @@ function App() {
         </div>
       </div>
     </div>
-
   );
 }
 

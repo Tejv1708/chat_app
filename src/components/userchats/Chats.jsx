@@ -1,27 +1,21 @@
 // src/components/ChatApp.js
-import React, { useEffect, useState } from 'react';
-import socket from '../socket';
+import React, { useState } from 'react';
 
-const ChatApp = () => {
+const Chats = () => {
     const [ text, setText ] = useState( '' );
-    const [ messages, setMessages ] = useState( [] );
-
-    // useEffect( () => {
-    //     socket.on( 'chat message', ( message ) => {
-    //         setMessages( [ ...messages, { text: message } ] );
-    //     } );
-    //     return () => {
-    //         socket.off( 'chat message' );
-    //     };
-    // }, [ messages ] );
+    const [ messages, setMessages ] = useState( [
+        { text: "Hello!", sender: "other" },
+        { text: "Hi, how are you?", sender: "me" },
+        { text: "I'm good, thanks!", sender: "other" },
+        { text: "Great to hear!", sender: "me" }
+    ] );
 
     const handleSubmit = ( e ) => {
         e.preventDefault();
-        setText( '' );
-        // if ( text.trim() !== '' ) {
-        //     socket.emit( 'chat message', text );
-        //     setText( '' );
-        // }
+        if ( text.trim() !== '' ) {
+            setMessages( [ ...messages, { text, sender: "me" } ] );
+            setText( '' );
+        }
     };
 
     return (
@@ -30,8 +24,7 @@ const ChatApp = () => {
                 { messages.map( ( message, index ) => (
                     <div
                         key={ index }
-                        className={ `text-white p-2 my-2 rounded-lg message ${ index % 2 === 0 ? 'bg-blue-500' : 'bg-gray-700'
-                            }` }
+                        className={ `p-2 my-2 rounded-lg ${ message.sender === "me" ? 'bg-blue-500 text-white self-end' : 'bg-gray-300 text-gray-700 self-start' }` }
                     >
                         { message.text }
                     </div>
@@ -56,4 +49,4 @@ const ChatApp = () => {
     );
 };
 
-export default ChatApp;
+export default Chats;
